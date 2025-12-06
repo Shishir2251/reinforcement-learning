@@ -3,15 +3,15 @@ from replay_buffer import ReplayBuffer
 from dqn_agent import DQNAgent
 import numpy as np
 
-env = gym.make("CartPole-v1")   # FIXED
+env = gym.make("CartPole-v1") 
 
 state_dim = env.observation_space.shape[0]
-action_dim = env.action_space.n  # FIXED
+action_dim = env.action_space.n  
 
 agent = DQNAgent(state_dim, action_dim)
 buffer = ReplayBuffer()
 
-episodes = 300   # FIXED spelling
+episodes = 300   
 batch_size = 32
 
 for ep in range(episodes):

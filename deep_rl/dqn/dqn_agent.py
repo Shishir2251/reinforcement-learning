@@ -8,13 +8,12 @@ class DQNAgent:
     def __init__(self, state_dim, action_dim, lr=1e-3, gamma=0.99):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
 
-        # Policy network (learning network)
+       
         self.policy_net = DQN(state_dim, action_dim).to(self.device)
 
-        # Target network (stabilizes training)
+        
         self.target_net = DQN(state_dim, action_dim).to(self.device)
 
-        # ✅ Correct load_state_dict
         self.target_net.load_state_dict(self.policy_net.state_dict())
 
         self.optimizer = optim.Adam(self.policy_net.parameters(), lr=lr)
@@ -22,7 +21,7 @@ class DQNAgent:
         self.gamma = gamma
         self.action_dim = action_dim
 
-        # epsilon greedy
+        
         self.epsilon = 1.0
         self.epsilon_min = 0.05
         self.epsilon_decay = 0.995
@@ -61,7 +60,7 @@ class DQNAgent:
         loss.backward()
         self.optimizer.step()
 
-        # decay exploration
+        
         self.epsilon = max(self.epsilon_min, self.epsilon * self.epsilon_decay)
 
     def update_target(self):
